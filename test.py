@@ -14,8 +14,10 @@ def main():
     audio_bytes = audio_recorder(pause_threshold=30)
     
     if st.button("Save Recording"):
+        st.write("Saving...")
         with open("recorded_audio.wav", "wb") as f:
             f.write(audio_bytes)
+        st.write("Recording saved!")
         st.success("Recording saved!")
 
         audio_file= open("./recorded_audio.wav", "rb")
