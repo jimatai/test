@@ -1,11 +1,10 @@
-import openai
+from openai import OpenAI
 import streamlit as st
 from audio_recorder_streamlit import audio_recorder
 from tempfile import NamedTemporaryFile
 
 # Replace with your OpenAI API key
-api_key = st.secrets["openai"]["api_key"]
-openai.api_key = api_key
+client = OpenAI(api_key= st.secrets["openai"]["api_key"])
 
 # Example usage with Streamlit:
 def main():
@@ -19,13 +18,14 @@ def main():
             f.write(audio_bytes)
         st.success("Recording saved!")
 
-        audio_file = open("./recorded_audio.wav", "rb")
-        transcript = openai.Audio.transcribe("whisper-1", audio_file, response_format="vtt")
+        audio_file= open("./recorded_audio.wav", "rb")
+        transcription = client.audio.transcriptions.create(
+            model="whisper-1", 
+            file=audio_file, 
+            response_format="text"
+        )
 
-        st.write(transcript)
-
-        with open("output.vtt", "w", encoding = "utf-8") as file:
-            file.write(transcript)
+        st.write(transcription)
 
 if __name__ == "__main__":
     main()
