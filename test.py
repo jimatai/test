@@ -34,7 +34,7 @@ def main():
 
         service_account_info = st.secrets["dia"]["service_account_info"]
         st.write(service_account_info)
-        service_account_info = json.loads(service_account_info)
+        service_account_info = json.loads(service_account_info, strict=False) 
         session_id = uuid.uuid4()
         location = 'asia-northeast1'
 
