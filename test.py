@@ -27,5 +27,15 @@ def main():
 
         st.write(transcription)
 
+        speech_file_path = "recorded_audio.wav"
+        response = client.audio.speech.create(
+        model="tts-1",
+        voice="fable", # alloy, echo, fable, onyx, nova, shimmer
+        input= transcription
+        )
+        response.stream_to_file(speech_file_path)
+
+        st.audio("recorded_audio.wav")
+
 if __name__ == "__main__":
     main()
