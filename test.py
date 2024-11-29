@@ -32,8 +32,6 @@ def main():
 
         st.write(transcription)
 
-        #dialogflow_credential_path = 'smart-pxud-8e8de1cea674.json'
-        #with open(dialogflow_credential_path, 'r') as f:
         service_account_info = st.secrets["dia"]["service_account_info"]
         session_id = uuid.uuid4()
         location = 'asia-northeast1'
