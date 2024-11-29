@@ -32,7 +32,7 @@ def main():
 
         st.write(transcription)
 
-        service_account_info = st.secrets["dia"]["service_account_info"]
+        service_account_info = json.loads(st.secrets["dia"]["service_account_info"])
         session_id = uuid.uuid4()
         location = 'asia-northeast1'
 
